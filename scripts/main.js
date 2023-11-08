@@ -16,7 +16,7 @@ module.exports.loop = function () {
 
     creepCreator.create(4,'harvester');
     creepCreator.create(4,'upgrader');
-    creepCreator.create(2,'builder');
+    creepCreator.create(4,'builder');
 
 
     if(Game.spawns['Spawn1'].spawning) {

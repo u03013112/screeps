@@ -1,31 +1,16 @@
-// 所有的名字都在这里选，目前就是简单的顺序挑选
+// 输入role，名字就简单的按照role+数字的方式来命名
+// 其中数字从1开始，尽可能的小，这样可以保证用名字来做离散比较均匀
 
 var nameManager = {
-    harvesterNameList:['harvester1', 'harvester2', 'harvester3', 'harvester4'],
-    upgraderNameList:['upgrader1', 'upgrader2', 'upgrader3', 'upgrader4'],
-    builderNameList:['builder1', 'builder2', 'builder3', 'builder4'],
     /** @param {string} role :类似 harvester or upgrader**/ 
     getName: function(role) {
-        if (role == 'harvester') {
-            for (var name of this.harvesterNameList) {
-                if (!Game.creeps[name]) {
-                    return name;
-                }
+        // 暂时只支持到100个
+        for (var i = 1; i < 100; i++) {
+            var name = role + i;
+            if (!Game.creeps[name]) {
+                return name;
             }
-        }
-        if (role == 'upgrader') {
-            for (var name of this.upgraderNameList) {
-                if (!Game.creeps[name]) {
-                    return name;
-                }
-            }
-        }
-        if (role == 'builder') {
-            for (var name of this.builderNameList) {
-                if (!Game.creeps[name]) {
-                    return name;
-                }
-            }
+            
         }
 
         console.log('No name available for role: ' + role);
