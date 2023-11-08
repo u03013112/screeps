@@ -22,7 +22,7 @@ var nameManager = {
         }
 
         console.log('No name available for role: ' + role);
-        return None;
+        return '';
     },
 }
 

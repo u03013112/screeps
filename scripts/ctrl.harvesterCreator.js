@@ -5,7 +5,7 @@ var harvesterCreator = {
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
         if(harvesters.length < maxCout) {
             var newName = nameManager.getName('harvester');
-            if (newName == None) {
+            if (newName == '') {
                 console.log('No name available for role: harvester');
                 return;
             }

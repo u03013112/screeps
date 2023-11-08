@@ -5,7 +5,7 @@ var upgraderCreator = {
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         if(upgraders.length < maxCout) {
             var newName = nameManager.getName('upgrader');
-            if (newName == None) {
+            if (newName == '') {
                 console.log('No name available for role: upgrader');
                 return;
             }
