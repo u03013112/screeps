@@ -5,6 +5,8 @@ for screeps
 
 目前还在测试。github完成代码后，是需要在游戏中手动点一下同步的。第一次同步成功后会有记忆仓库与路径，下一次直接点一下同步即可。
 
+发现只要提交到github的主分支上就自动同步到游戏，还是很方便的。
+
 ## vscode 环境搭建
 
 npm config set registry https://registry.npm.taobao.org
@@ -23,3 +25,5 @@ npm install @types/screeps @types/lodash@3.10.1
 2、自动制作升级者，需求与收割者一样。
 
 3、采矿的算法修改，目前是都去sources[0]，要均衡一下。在每个可以采集的creep中（收割者或升级者）的内存中维护目前的采集目标ID。在main中定期的进行均衡。
+
+这个游戏好复杂，研究了1个多小时什么都不明白。
