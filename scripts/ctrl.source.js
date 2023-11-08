@@ -16,6 +16,7 @@ var source = {
         var sources = creep.room.find(FIND_SOURCES);
         var idAsInt = parseInt(creep.id, 16); // 将16进制字符串转换为整数
         var index = idAsInt % sources.length;
+        console.log(creep.name + " [" + idAsInt + "] " + ":" + index)
         return sources[index];
     },
 }
