@@ -3,7 +3,7 @@
 var nameManager = {
     harvesterNameList:['harvester1', 'harvester2', 'harvester3', 'harvester4'],
     upgraderNameList:['upgrader1', 'upgrader2', 'upgrader3', 'upgrader4'],
-
+    builderNameList:['builder1', 'builder2', 'builder3', 'builder4'],
     /** @param {string} role :类似 harvester or upgrader**/ 
     getName: function(role) {
         if (role == 'harvester') {
@@ -15,6 +15,13 @@ var nameManager = {
         }
         if (role == 'upgrader') {
             for (var name of this.upgraderNameList) {
+                if (!Game.creeps[name]) {
+                    return name;
+                }
+            }
+        }
+        if (role == 'builder') {
+            for (var name of this.builderNameList) {
                 if (!Game.creeps[name]) {
                     return name;
                 }
