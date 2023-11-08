@@ -11,7 +11,7 @@ var creepCreator = {
                 console.log('No name available for role: ' + role);
                 return;
             }
-            console.log('Spawning new harvester: ' + newName);
+            console.log('Try to spawning: ' + newName);
             spawns[0].spawnCreep([WORK,CARRY,MOVE], newName, 
                 {memory: {role: role}});
         }
