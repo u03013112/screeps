@@ -1,4 +1,4 @@
- var source = require('ctrl.source');
+var source = require('ctrl.source');
 
 var roleHarvester = {
 
