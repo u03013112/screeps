@@ -1,19 +1,19 @@
 var nameManager = require('data.nameManager');
 
-var upgradeCreator = {
+var upgraderCreator = {
     create: function(maxCout) {
-        var upgrades = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrade');
-        if(upgrades.length < maxCout) {
-            var newName = nameManager.getName('upgrade');
+        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+        if(upgraders.length < maxCout) {
+            var newName = nameManager.getName('upgrader');
             if (newName == None) {
-                console.log('No name available for role: upgrade');
+                console.log('No name available for role: upgrader');
                 return;
             }
-            console.log('Spawning new upgrade: ' + newName);
+            console.log('Spawning new upgrader: ' + newName);
             Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
-                {memory: {role: 'upgrade'}});
+                {memory: {role: 'upgrader'}});
         }
     }
 }
 
-module.exports = upgradeCreator;
+module.exports = upgraderCreator;
