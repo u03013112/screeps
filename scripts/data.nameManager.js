@@ -7,14 +7,14 @@ var nameManager = {
     /** @param {string} role :类似 harvester or upgrader**/ 
     getName: function(role) {
         if (role == 'harvester') {
-            for (var name in this.harvesterNameList) {
+            for (var name of this.harvesterNameList) {
                 if (!Game.creeps[name]) {
                     return name;
                 }
             }
         }
         if (role == 'upgrader') {
-            for (var name in this.upgraderNameList) {
+            for (var name of this.upgraderNameList) {
                 if (!Game.creeps[name]) {
                     return name;
                 }
