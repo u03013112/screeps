@@ -9,6 +9,13 @@ var source = {
         }
         Memory.sourceIndex = (index + 1) % sources.length;
         return sources[index];
-    }
+    },
+    // 简单的负载放哪，直接用creep的id进行离散（直接取模），这种方案的好处是creep不用存储目标id
+    // 也不存在走在路上资源没有了的问题。 
+    getSource2: function (creep) {
+        var sources = creep.room.find(FIND_SOURCES);
+        var index = creep.id % sources.length;
+        return sources[index];
+    },
 }
 module.exports = source;
