@@ -11,9 +11,20 @@ var creepCreator = {
                 console.log('No name available for role: ' + role);
                 return;
             }
-            console.log('Try to spawning: ' + newName);
-            spawns[0].spawnCreep([WORK,CARRY,MOVE], newName, 
-                {memory: {role: role}});
+            
+            var testIfCanSpawn = spawns[0].spawnCreep([WORK,CARRY,MOVE], newName,
+                {
+                    memory: {role: role},
+                    dryRun: true
+                });
+
+            if (testIfCanSpawn == OK) {
+                console.log('Try to spawning: ' + newName);
+                spawns[0].spawnCreep([WORK,CARRY,MOVE], newName,
+                    {
+                        memory: {role: role}
+                    });
+            }
         }
     }
 }
