@@ -12,7 +12,7 @@ var creepCreator = {
                 return;
             }
             
-            var testIfCanSpawn = spawns[0].spawnCreep([WORK,CARRY,MOVE], newName,
+            var testIfCanSpawn = spawns[0].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
                 {
                     memory: {role: role},
                     dryRun: true
@@ -20,7 +20,7 @@ var creepCreator = {
 
             if (testIfCanSpawn == OK) {
                 console.log('Try to spawning: ' + newName);
-                spawns[0].spawnCreep([WORK,CARRY,MOVE], newName,
+                spawns[0].spawnCreep([WORK,CARRY,MOVE,MOVE], newName,
                     {
                         memory: {role: role}
                     });
