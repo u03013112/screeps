@@ -14,10 +14,8 @@ var source = {
     // 也不存在走在路上资源没有了的问题。 
     getSource2: function (creep) {
         var sources = creep.room.find(FIND_SOURCES);
-        var index = creep.id % sources.length;
-        console.log(creep.id);
-        console.log(sources);
-        console.log(index);
+        var idAsInt = parseInt(creep.id, 16); // 将16进制字符串转换为整数
+        var index = idAsInt % sources.length;
         return sources[index];
     },
 }
