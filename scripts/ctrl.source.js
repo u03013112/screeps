@@ -15,6 +15,9 @@ var source = {
     getSource2: function (creep) {
         var sources = creep.room.find(FIND_SOURCES);
         var index = creep.id % sources.length;
+        console.log(creep.name);
+        console.log(sources);
+        console.log(index);
         return sources[index];
     },
 }
