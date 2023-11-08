@@ -2,15 +2,17 @@ var nameManager = require('data.nameManager');
 
 var creepCreator = {
     create: function(maxCout,role) {
-        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == role);
-        if(harvesters.length < maxCout) {
+        var creeps = _.filter(Game.creeps, (creep) => creep.memory.role == role);
+        var spawns = _.filter(Game.spawns, (spawn) => spawn.spawning == false);
+
+        if(creeps.length < maxCout && spawns.length > 0) {
             var newName = nameManager.getName(role);
             if (newName == '') {
                 console.log('No name available for role: harvester');
                 return;
             }
             console.log('Spawning new harvester: ' + newName);
-            Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName, 
+            spawns[0].spawnCreep([WORK,CARRY,MOVE], newName, 
                 {memory: {role: role}});
         }
     }
