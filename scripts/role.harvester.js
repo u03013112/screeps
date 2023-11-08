@@ -6,6 +6,7 @@ var roleHarvester = {
     run: function(creep) {
         if(creep.store.getFreeCapacity() > 0) {
             var source0 = source.getSource2(creep);
+            print(creep.name + ":" + source0.id)
             if(creep.harvest(source0) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source0, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
