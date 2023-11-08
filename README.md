@@ -27,3 +27,7 @@ npm install @types/screeps @types/lodash@3.10.1
 3、采矿的算法修改，目前是都去sources[0]，要均衡一下。在每个可以采集的creep中（收割者或升级者）的内存中维护目前的采集目标ID。在main中定期的进行均衡。
 
 这个游戏好复杂，研究了1个多小时什么都不明白。
+
+思路貌似是先造一些creep，然后造spawn扩展，造更厉害的creep。
+
+更厉害的creep需要更复杂的逻辑控制，明天有空再写吧
