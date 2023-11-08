@@ -11,13 +11,16 @@ var source = {
         return sources[index];
     },
     // 简单的负载放哪，直接用creep的id进行离散（直接取模），这种方案的好处是creep不用存储目标id
-    // 也不存在走在路上资源没有了的问题。 
+    // 也不存在走在路上资源没有了的问题。
+    // 但是目前这个方案并不均衡，改为用名字后缀的数字进行离散 
     getSource2: function (creep) {
         var sources = creep.room.find(FIND_SOURCES);
-        var lastThreeChars = creep.id.slice(-3); // 获取字符串的最后3个字符
-        var idAsInt = parseInt(lastThreeChars, 16); // 将16进制字符串转换为整数
-        var index = idAsInt % sources.length;
-        console.log(creep.name + " [" + idAsInt + "] " + ":" + index)
+        var lastChar = creep.name.slice(-1); // 获取名字的最后一个字符
+        var index = parseInt(lastChar, 10); // 尝试将字符转换为数字
+        if (isNaN(index)) { // 如果转换失败，将index设为0
+            index = 0;
+        }
+        index = index % sources.length;
         return sources[index];
     },
 }
