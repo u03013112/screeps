@@ -11,4 +11,4 @@ var source = {
         return sources[index];
     }
 }
-moudle.exports = source;
+module.exports = source;
