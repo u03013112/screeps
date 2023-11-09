@@ -86,6 +86,13 @@ var roleHarvester = {
                 if (ret == ERR_FULL || ret == OK) {
                     delete creep.memory.transferingTarget;
                 }
+            }else{
+                // 如果没有找到目标，大概率是目前所有的存储都满了
+                // 这时候来到spawn旁边，等待spawn有空间了再继续工作
+                var spawn = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
+                if (spawn) {
+                    creep.moveTo(spawn, { visualizePathStyle: { stroke: '#ffffff' } });
+                }
             }
         }
     }
