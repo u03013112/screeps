@@ -12,7 +12,7 @@ var creepCreator = {
                 return;
             }
             
-            var components = [WORK,CARRY,MOVE,MOVE];
+            var components = [WORK,WORK,CARRY,CARRY,MOVE,MOVE];
 
             var testIfCanSpawn = spawns[0].spawnCreep(components, newName,
                 {
