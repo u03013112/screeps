@@ -6,8 +6,14 @@
 var signer = {
     run: function(creep) {
         if(creep.room.controller) {
-            if(creep.signController(creep.room.controller, creep.memory['sign']) == ERR_NOT_IN_RANGE) {
+            ret = creep.signController(creep.room.controller, creep.memory['sign']);
+            if(ret == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller);
+            }
+            if(ret == OK) {
+                creep.say('📝 sign OK');
+                // 已经没用了，自杀
+                creep.suicide();
             }
         }
     }
