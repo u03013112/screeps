@@ -13,5 +13,11 @@ var tools = {
             console.log(role + ": [" + roles[role].join(", ") + "]");
         }
     },
+    energy: function(){
+        for(var name in Game.rooms){
+            var room = Game.rooms[name];
+            console.log(name + ": " + room.energyAvailable + "/" + room.energyCapacityAvailable);
+        }
+    },
 };
 module.exports = tools;
