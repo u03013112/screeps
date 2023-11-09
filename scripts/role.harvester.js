@@ -58,6 +58,10 @@ var roleHarvester = {
         if (creep.memory.state === 'harvesting') {
             if (!creep.memory.harvestingTarget) { // 如果没有采集目标，寻找新的目标
                 var source0 = source.getSource2(creep);
+                if (!source0) {
+                    creep.say('❌ no source');
+                    return;
+                }
                 creep.memory.harvestingTarget = source0.id;
             }
             var target = Game.getObjectById(creep.memory.harvestingTarget);
