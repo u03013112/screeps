@@ -12,12 +12,14 @@ var tools = {
         for(var role in roles){
             console.log(role + ": [" + roles[role].join(", ") + "]");
         }
+        return OK;
     },
     energy: function(){
         for(var name in Game.rooms){
             var room = Game.rooms[name];
             console.log(name + ": " + room.energyAvailable + "/" + room.energyCapacityAvailable);
         }
+        return OK;
     },
 };
 module.exports = tools;
