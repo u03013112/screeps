@@ -78,6 +78,10 @@ var roleHarvester = {
                 });
                 if (targets.length > 0) {
                     var target = creep.pos.findClosestByPath(targets);
+                    if (!target) {
+                        creep.say('❌ no target');
+                        return;
+                    }
                     creep.memory.transferingTarget = target.id;
                 }
             }
