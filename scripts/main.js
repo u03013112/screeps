@@ -16,10 +16,7 @@ module.exports.loop = function () {
         }
     }
 
-    creepCreator.create(2,'builder');
-    creepCreator.create(4,'upgrader');
-    creepCreator.create(4,'harvester');
-
+    creepCreator.autoCreat();
 
     if(Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
