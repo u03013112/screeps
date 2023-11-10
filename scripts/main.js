@@ -16,7 +16,7 @@ module.exports.loop = function () {
         }
     }
 
-    creepCreator.create(4,'builder');
+    creepCreator.create(2,'builder');
     creepCreator.create(4,'upgrader');
     creepCreator.create(4,'harvester');
 
