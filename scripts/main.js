@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var signer = require('role.signer');
 
+var tower = require('struct.tower');
 var creepCreator = require('ctrl.creepCreator');
 
 
@@ -43,5 +44,14 @@ module.exports.loop = function () {
         if(creep.memory.role == 'signer'){
             signer.run(creep)
         }
+    }
+
+    var towers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_TOWER;
+        }
+    });
+    for(var name in towers){
+        tower.run(towers[name]);
     }
 }
