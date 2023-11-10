@@ -79,10 +79,26 @@ var roleHarvester = {
                 if (targets.length > 0) {
                     var target = creep.pos.findClosestByPath(targets);
                     if (!target) {
-                        creep.say('❌ no target');
+                        creep.say('❌ no way');
                         return;
                     }
                     creep.memory.transferingTarget = target.id;
+                }else{
+                    // 找不到存储目标，找塔
+                    targets = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType === STRUCTURE_TOWER) &&
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                        }
+                    });
+                    if (targets.length > 0) {
+                        var target = creep.pos.findClosestByPath(targets);
+                        if (!target) {
+                            creep.say('❌ no way');
+                            return;
+                        }
+                        creep.memory.transferingTarget = target.id;
+                    }
                 }
             }
             var target = Game.getObjectById(creep.memory.transferingTarget);
