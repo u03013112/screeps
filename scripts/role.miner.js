@@ -35,8 +35,9 @@ var miner = {
         if (!creep.memory.targetId) {
             var containers = creep.room.find(FIND_STRUCTURES,{
                 filter: (structure) => {
-                    return structure.structureType == STRUCTURE_CONTAINER &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    // return structure.structureType == STRUCTURE_CONTAINER &&
+                    //     structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    return structure.structureType == STRUCTURE_CONTAINER;
                 }
             })
             var lastChar = creep.name.slice(-1); // 获取名字的最后一个字符
