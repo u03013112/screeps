@@ -31,7 +31,7 @@ var tools = {
     resetMiner: function(){
         // 重置矿工的targetId
         var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
-        for(var miner in miners){
+        for(var miner of miners){
             console.log('miner: ' + miner.name)
             console.log('targetId: ' + miner.memory.targetId);
             delete miner.memory.targetId;
