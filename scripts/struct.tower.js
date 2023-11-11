@@ -9,7 +9,7 @@ var tower = {
 
         // 优先修复血量最低的建筑
         var damagedStructs = tower.room.find(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
+            filter: (structure) => structure.hits < (structure.hitsMax - 800)
         });
         damagedStructs.sort((a,b) => a.hits - b.hits);
         if(damagedStructs.length > 0){

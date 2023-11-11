@@ -42,3 +42,12 @@ Memory.creepCreator.components = ['work','carry','move','work','carry','move']
 Memory.creepCreator.components = ['work','carry','move','work','carry','move','work','carry','move']
 ```
 
+修改制造creep的数量
+
+```js
+Memory.creepCreator.maxCout.builder = 0
+Memory.creepCreator.maxCout.harvester = 0
+Memory.creepCreator.maxCout.upgrader = 0
+``` 
+
+
