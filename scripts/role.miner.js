@@ -5,7 +5,12 @@ var miner = {
         // 自动填充，自动创建
         // 保持每个container都有一个miner
         var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
-        var containers = _.filter(Game.structures, (structure) => structure.structureType == STRUCTURE_CONTAINER);
+        // var containers = _.filter(Game.structures, (structure) => structure.structureType == STRUCTURE_CONTAINER);
+        var containers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES,{
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_CONTAINER;
+            }
+        })
 
         // console.log('miners: ' + miners.length + ', containers: ' + containers.length);
         if (miners.length < containers.length) {
@@ -16,7 +21,7 @@ var miner = {
                     memory: {role: 'miner'},
                     dryRun: true
                 });
-            console.log('testIfCanSpawn: ' + testIfCanSpawn);
+            // console.log('testIfCanSpawn: ' + testIfCanSpawn);
             if (testIfCanSpawn == OK) {
                 console.log('Try to spawning: ' + newName);
                 Game.spawns['Spawn1'].spawnCreep(components, newName,
