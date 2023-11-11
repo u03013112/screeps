@@ -2,6 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var signer = require('role.signer');
+var miner = require('role.miner');
 
 var tower = require('struct.tower');
 var creepCreator = require('ctrl.creepCreator');
@@ -17,6 +18,7 @@ module.exports.loop = function () {
     }
 
     creepCreator.autoCreat();
+    miner.autoCreat();
 
     if(Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
@@ -40,6 +42,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'signer'){
             signer.run(creep)
+        }
+        if(creep.memory.role == 'miner'){
+            miner.run(creep)
         }
     }
 
