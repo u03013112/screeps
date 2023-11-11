@@ -28,5 +28,13 @@ var tools = {
             console.log(structure.id + ": " + structure.structureType);
         }
     },
+    resetMiner: function(){
+        // 重置矿工的targetId
+        var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
+        for(var name in miners){
+            var creep = Game.creeps[name];
+            delete creep.memory.targetId;
+        }
+    },
 };
 module.exports = tools;
