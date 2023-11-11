@@ -15,7 +15,8 @@ var miner = {
         // console.log('miners: ' + miners.length + ', containers: ' + containers.length);
         if (miners.length < containers.length) {
             var newName = nameManager.getName('miner');
-            var components = [WORK,WORK,WORK,WORK,WORK,MOVE];
+            // var components = [WORK,WORK,WORK,WORK,WORK,MOVE];
+            var components = [WORK,WORK,WORK,WORK,WORK,WORK,WORK,MOVE];
             var testIfCanSpawn = Game.spawns['Spawn1'].spawnCreep(components, newName,
                 {
                     memory: {role: 'miner'},

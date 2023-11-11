@@ -31,3 +31,14 @@ npm install @types/screeps @types/lodash@3.10.1
 思路貌似是先造一些creep，然后造spawn扩展，造更厉害的creep。
 
 更厉害的creep需要更复杂的逻辑控制，明天有空再写吧
+
+## 临时console命令
+
+修改制造creep的组件
+
+```js
+Memory.creepCreator.components = ['work','carry','move']
+Memory.creepCreator.components = ['work','carry','move','work','carry','move']
+Memory.creepCreator.components = ['work','carry','move','work','carry','move','work','carry','move']
+```
+
