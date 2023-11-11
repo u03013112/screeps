@@ -6,7 +6,8 @@ var miner = {
         // 保持每个container都有一个miner
         var miners = _.filter(Game.creeps, (creep) => creep.memory.role == 'miner');
         var containers = _.filter(Game.structures, (structure) => structure.structureType == STRUCTURE_CONTAINER);
-        console.log('miners: ' + miners.length + ', containers: ' + containers.length);
+
+        // console.log('miners: ' + miners.length + ', containers: ' + containers.length);
         if (miners.length < containers.length) {
             var newName = nameManager.getName('miner');
             var components = [WORK,WORK,WORK,WORK,WORK,MOVE];

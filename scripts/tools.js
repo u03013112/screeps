@@ -21,5 +21,12 @@ var tools = {
         }
         return OK;
     },
+    struct:function(){
+        // debug，打印所有的Game.structures，id和type
+        for(var name in Game.structures){
+            var structure = Game.structures[name];
+            console.log(structure.id + ": " + structure.structureType);
+        }
+    },
 };
 module.exports = tools;
