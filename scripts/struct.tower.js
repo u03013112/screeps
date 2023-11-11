@@ -7,30 +7,14 @@ var tower = {
             tower.attack(closestHostile);
         }
 
-        // 优先修复container
-        var damagedContainers = _.filter(damagedStructs, (structure) => {
-            return structure.structureType == STRUCTURE_CONTAINER && structure.hits < structure.hitsMax;
-        })
-        if(damagedContainers.length > 0){
-            tower.repair(damagedContainers[0]);
-            return;
-        }
-
-        // 修复除了rampart和wall以外的其他建筑
-        var damagedStructs = _.filter(damagedStructs, (structure) => {
-            return structure.structureType != STRUCTURE_WALL && structure.structureType != STRUCTURE_RAMPART && structure.hits < structure.hitsMax;
-        })
+        // 优先修复血量最低的建筑
+        var damagedStructs = tower.room.find(FIND_STRUCTURES, {
+            filter: (structure) => structure.hits < structure.hitsMax
+        });
+        damagedStructs.sort((a,b) => a.hits - b.hits);
         if(damagedStructs.length > 0){
             tower.repair(damagedStructs[0]);
             return;
-        }
-
-        // 修复rampart和wall
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
-        });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
         }
     },
 };
