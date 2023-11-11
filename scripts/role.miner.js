@@ -14,6 +14,7 @@ var miner = {
                     memory: {role: 'miner'},
                     dryRun: true
                 });
+            console.log('testIfCanSpawn: ' + testIfCanSpawn);
             if (testIfCanSpawn == OK) {
                 console.log('Try to spawning: ' + newName);
                 Game.spawns['Spawn1'].spawnCreep(components, newName,
