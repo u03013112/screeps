@@ -66,7 +66,7 @@ var miner = {
         
         if(creep.pos.isEqualTo(target.pos)){
             var sources = creep.room.find(FIND_SOURCES);
-            if (length(sources) > 0) {
+            if (sources.length > 0) {
                 var source = target.pos.findClosestByPath(sources);
                 creep.harvest(source);
             }

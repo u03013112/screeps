@@ -56,6 +56,20 @@ var roleHarvester = {
 
         // 3. 根据状态尝试与目标交互
         if (creep.memory.state === 'harvesting') {
+            // 先尝试从container中获取能量
+            var containers = creep.room.find(FIND_STRUCTURES,{
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_CONTAINER &&
+                        structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+                }
+            })
+            if (containers.length > 0) {
+                var container = creep.pos.findClosestByPath(containers);
+                if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(container);
+                }
+                return;
+            }
             if (!creep.memory.harvestingTarget) { // 如果没有采集目标，寻找新的目标
                 var source0 = source.getSource2(creep);
                 if (!source0) {
