@@ -60,11 +60,13 @@ var miner = {
         }
 
         if (!target) {
+            creep.say('❌ no target2');
             delete creep.memory.targetId;
             return;
         }
         
         if(creep.pos.isEqualTo(target.pos)){
+            creep.say('🔄 harvest');
             var sources = creep.room.find(FIND_SOURCES);
             if (sources.length > 0) {
                 var source = target.pos.findClosestByPath(sources);
