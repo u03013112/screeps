@@ -32,6 +32,10 @@ npm install @types/screeps @types/lodash@3.10.1
 
 更厉害的creep需要更复杂的逻辑控制，明天有空再写吧
 
+2023-11-12
+
+harvester的逻辑需要重写，目前是每个creeper存储目标，会导致目的重复。可以暂时简单的改为每个tick进行判断，之后再做全局统筹
+
 ## 临时console命令
 
 修改制造creep的组件
@@ -39,7 +43,7 @@ npm install @types/screeps @types/lodash@3.10.1
 ```js
 Memory.creepCreator.components = ['work','carry','move']
 Memory.creepCreator.components = ['work','carry','move','work','carry','move']
-Memory.creepCreator.components = ['work','carry','move','work','carry','move','work','carry','move']
+Memory.creepCreator.components = ['work','work','carry','carry','carry','carry','move','move','move']
 ```
 
 修改制造creep的数量
