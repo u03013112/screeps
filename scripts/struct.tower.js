@@ -6,6 +6,7 @@ var tower = {
         console.log('closestHostile',closestHostile);
         if(closestHostile) {
             tower.attack(closestHostile);
+            return;
         }
 
         // 优先修复血量最低的建筑
