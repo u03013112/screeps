@@ -6,9 +6,11 @@ var miner = require('role.miner');
 
 var tower = require('struct.tower');
 var creepCreator = require('ctrl.creepCreator');
-
+var status = require('ctrl.status');
 
 module.exports.loop = function () {
+
+    status.update();
 
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
