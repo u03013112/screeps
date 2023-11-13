@@ -83,53 +83,40 @@ var roleHarvester = {
                 creep.moveTo(target, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         } else if (creep.memory.state === 'transfering') {
-            if (!creep.memory.transferingTarget) { // 如果没有转移目标，寻找新的目标
-                var targets = creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
-                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+            // 暂时不再存储transfer目标，每一个tick都重新寻找
+            // 找到最近的有空间的extension或者spawn
+            var targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                }
+            });
+            if(target.length > 0){
+                var target = creep.pos.findClosestByPath(targets);
+                if (target) {
+                    ret = creep.transfer(target, RESOURCE_ENERGY);
+                    if (ret == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                     }
-                });
-                if (targets.length > 0) {
-                    var target = creep.pos.findClosestByPath(targets);
-                    if (!target) {
-                        creep.say('❌ no way');
-                        return;
-                    }
-                    creep.memory.transferingTarget = target.id;
-                }else{
-                    // 找不到存储目标，找塔
-                    targets = creep.room.find(FIND_STRUCTURES, {
-                        filter: (structure) => {
-                            return (structure.structureType === STRUCTURE_TOWER) &&
-                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                        }
-                    });
-                    if (targets.length > 0) {
-                        var target = creep.pos.findClosestByPath(targets);
-                        if (!target) {
-                            creep.say('❌ no way');
-                            return;
-                        }
-                        creep.memory.transferingTarget = target.id;
-                    }
+                    return;
                 }
             }
-            var target = Game.getObjectById(creep.memory.transferingTarget);
-            if (target){
-                ret = creep.transfer(target, RESOURCE_ENERGY);
-                if (ret == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+
+            // 找不到存储目标，找塔
+            targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === STRUCTURE_TOWER) &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
-                if (ret == ERR_FULL || ret == OK) {
-                    delete creep.memory.transferingTarget;
-                }
-            }else{
-                // 如果没有找到目标，大概率是目前所有的存储都满了
-                // 这时候来到spawn旁边，等待spawn有空间了再继续工作
-                var spawn = creep.pos.findClosestByPath(FIND_MY_SPAWNS);
-                if (spawn) {
-                    creep.moveTo(spawn, { visualizePathStyle: { stroke: '#ffffff' } });
+            });
+            if(target.length > 0){
+                var target = creep.pos.findClosestByPath(targets);
+                if (target) {
+                    ret = creep.transfer(target, RESOURCE_ENERGY);
+                    if (ret == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                    }
+                    return;
                 }
             }
         }
