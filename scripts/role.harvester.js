@@ -91,7 +91,7 @@ var roleHarvester = {
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
-            if(target.length > 0){
+            if(targets.length > 0){
                 var target = creep.pos.findClosestByPath(targets);
                 if (target) {
                     ret = creep.transfer(target, RESOURCE_ENERGY);
@@ -109,7 +109,7 @@ var roleHarvester = {
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
-            if(target.length > 0){
+            if(targets.length > 0){
                 var target = creep.pos.findClosestByPath(targets);
                 if (target) {
                     ret = creep.transfer(target, RESOURCE_ENERGY);
