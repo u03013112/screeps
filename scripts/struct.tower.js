@@ -3,7 +3,7 @@ var tower = {
         // 简单版本，目前抄https://raw.githubusercontent.com/screeps/tutorial-scripts/master/section5/main.js
 
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        console.log('closestHostile',closestHostile);
+
         if(closestHostile) {
             tower.attack(closestHostile);
             return;
