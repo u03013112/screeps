@@ -28,7 +28,7 @@ var status = {
                 Memory.status = '正常';
                 console.log('状态切换到正常');
                 Memory.creepCreator.components = ['work','work','carry','carry','carry','carry','move','move','move'];
-                Memory.creepCreator.maxCout.harvester = 6;
+                Memory.creepCreator.maxCout.harvester = 4;
                 Memory.creepCreator.maxCout.upgrader = 6;
                 return;
             }
