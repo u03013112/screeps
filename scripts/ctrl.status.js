@@ -21,6 +21,7 @@ var status = {
                 Memory.creepCreator.maxCout.upgrader = 0;
                 return;
             }
+        }
         if(Memory.status == '低消耗'){
             // 检查是否有足够的矿工和收割者，如果足够，切换到正常状态
             if(harvesters.length >= Memory.creepCreator.maxCout.harvester && miners.length >= containers.length){
