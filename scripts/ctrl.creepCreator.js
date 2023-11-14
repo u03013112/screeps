@@ -71,6 +71,55 @@ var creepCreator = {
             }
         }
     },
+    autoCreat2: function(){
+        if (!Memory.creepCreator2){
+            Memory.creepCreator2 = [
+                {
+                    'role': 'harvester',
+                    'maxCout': 4,
+                    'components':[WORK,CARRY,MOVE]
+                },
+                {
+                    'role': 'upgrader',
+                    'maxCout': 4,
+                    'components':[WORK,CARRY,MOVE]
+                },
+                {
+                    'role': 'builder',
+                    'maxCout': 4,
+                    'components':[WORK,CARRY,MOVE]
+                }
+            ]
+        }
+
+        for (var a of Memory.creepCreator2){
+            var role = a.role;
+            var maxCout = a.maxCout;
+            var components = a.components;
+            var creeps = _.filter(Game.creeps, (creep) => creep.memory.role == role);
+            var spawns = _.filter(Game.spawns, (spawn) => spawn.spawning == null);
+            if(creeps.length < maxCout && spawns.length > 0) {
+                var newName = nameManager.getName(role);
+                if (newName == '') {
+                    console.log('No name available for role: ' + role);
+                    return;
+                }
+                var testIfCanSpawn = spawns[0].spawnCreep(components, newName,
+                    {
+                        memory: {role: role},
+                        dryRun: true
+                    });
+                if (testIfCanSpawn == OK) {
+                    console.log('Try to spawning: ' + newName);
+                    spawns[0].spawnCreep(components, newName,
+                        {
+                            memory: {role: role}
+                        });
+                    return;
+                }
+            }
+        }
+    },
 }
 
 module.exports = creepCreator;
