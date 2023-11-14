@@ -83,24 +83,24 @@ var roleHarvester = {
                 creep.moveTo(target, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         } else if (creep.memory.state === 'transfering') {
-            // 暂时不再存储transfer目标，每一个tick都重新寻找
-            // 找到最近的有空间的extension或者spawn
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                }
-            });
-            if(targets.length > 0){
-                var target = creep.pos.findClosestByPath(targets);
-                if (target) {
-                    ret = creep.transfer(target, RESOURCE_ENERGY);
-                    if (ret == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
-                    }
-                    return;
-                }
-            }
+            // // 暂时不再存储transfer目标，每一个tick都重新寻找
+            // // 找到最近的有空间的extension或者spawn
+            // var targets = creep.room.find(FIND_STRUCTURES, {
+            //     filter: (structure) => {
+            //         return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
+            //             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+            //     }
+            // });
+            // if(targets.length > 0){
+            //     var target = creep.pos.findClosestByPath(targets);
+            //     if (target) {
+            //         ret = creep.transfer(target, RESOURCE_ENERGY);
+            //         if (ret == ERR_NOT_IN_RANGE) {
+            //             creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+            //         }
+            //         return;
+            //     }
+            // }
 
             // 找不到存储目标，找塔
             targets = creep.room.find(FIND_STRUCTURES, {
