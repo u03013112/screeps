@@ -47,6 +47,20 @@ var harvest = {
             }
             return;
         }
+        // 如果连source都没有，就找storage,理论上不会出现这种情况
+        var storages = creep.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_STORAGE &&
+                    structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+            }
+        })
+        if (storages.length > 0) {
+            var storage = creep.pos.findClosestByPath(storages);
+            if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(storage);
+            }
+            return;
+        }
     },
 };
 
