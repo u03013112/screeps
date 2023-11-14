@@ -32,21 +32,25 @@ var harvest = {
             }
             return;
         }
-        // 如果没有container，就去找source
-        var sources = creep.room.find(FIND_SOURCES);
-        if (sources.length > 0) {
-            var lastChar = creep.name.slice(-1); // 获取名字的最后一个字符
-            var index = parseInt(lastChar, 10); // 尝试将字符转换为数字
-            if (isNaN(index)) { // 如果转换失败，将index设为0
-                index = 0;
+        // 如果creep拥有work部件，就去找source
+        if (creep.getActiveBodyparts(WORK) > 0) {
+            // 如果没有container，就去找source
+            var sources = creep.room.find(FIND_SOURCES);
+            if (sources.length > 0) {
+                var lastChar = creep.name.slice(-1); // 获取名字的最后一个字符
+                var index = parseInt(lastChar, 10); // 尝试将字符转换为数字
+                if (isNaN(index)) { // 如果转换失败，将index设为0
+                    index = 0;
+                }
+                index = index % sources.length;
+                var source = sources[index];
+                if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(source);
+                }
+                return;
             }
-            index = index % sources.length;
-            var source = sources[index];
-            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(source);
-            }
-            return;
         }
+        
         // 如果连source都没有，就找storage,理论上不会出现这种情况
         var storages = creep.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
