@@ -85,20 +85,25 @@ var roleHarvester = {
         } else if (creep.memory.state === 'transfering') {
             // 暂时不再存储transfer目标，每一个tick都重新寻找
             // 找到最近的有空间的extension或者spawn
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-                }
-            });
-            if(targets.length > 0){
-                var target = creep.pos.findClosestByPath(targets);
-                if (target) {
-                    ret = creep.transfer(target, RESOURCE_ENERGY);
-                    if (ret == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+
+            // 如果房间内有敌人，优先把能量转移到塔里
+            var hostiles = creep.room.find(FIND_HOSTILE_CREEPS);
+            if(hostiles.length == 0) {
+                var targets = creep.room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
-                    return;
+                });
+                if(targets.length > 0){
+                    var target = creep.pos.findClosestByPath(targets);
+                    if (target) {
+                        ret = creep.transfer(target, RESOURCE_ENERGY);
+                        if (ret == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                        }
+                        return;
+                    }
                 }
             }
 
