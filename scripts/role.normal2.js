@@ -11,9 +11,70 @@ var normal2 = {
         var creeps = room.find(FIND_MY_CREEPS);
         for(var creep of creeps){
             if (creep.memory.role == 'storage2spawn'){
-             
+                // Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE],'storage2spawnTmp',{memory:{role:'storage2spawn'}})
+                if (creep.memory.state === undefined) {
+                    creep.memory.state = 'harvesting';
+                }
+                if (creep.memory.state === 'harvesting' && creep.store.getFreeCapacity() === 0) {
+                    creep.memory.state = 'transfering';
+                    creep.say('⚡ transfer');
+                } else if (creep.memory.state === 'transfering' && creep.store[RESOURCE_ENERGY] === 0) {
+                    creep.memory.state = 'harvesting';
+                    creep.say('🔄 harvest');
+                }
+                if (creep.memory.state === 'harvesting') {
+                    // 找到最近的storage
+                    var storage = creep.room.storage;
+                    if (storage && storage.store[RESOURCE_ENERGY] > 0){
+                        ret = creep.withdraw(storage,RESOURCE_ENERGY);
+                        if (ret != OK){
+                            console.log('creep.withdraw error:'+ret);
+                        }
+                    }
+                }else if (creep.memory.state === 'transfering') {
+                    var hostiles = creep.room.find(FIND_HOSTILE_CREEPS);
+                    if(hostiles.length == 0) {
+                        var targets = creep.room.find(FIND_STRUCTURES, {
+                            filter: (structure) => {
+                                return (structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
+                                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                            }
+                        });
+                        if(targets.length > 0){
+                            var target = creep.pos.findClosestByPath(targets);
+                            if (target) {
+                                ret = creep.transfer(target, RESOURCE_ENERGY);
+                                if (ret == ERR_NOT_IN_RANGE) {
+                                    creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                                }
+                                continue;
+                            }
+                        }
+                    }
+
+                    // 找不到存储目标，找塔
+                    targets = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType === STRUCTURE_TOWER) &&
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                        }
+                    });
+                    if(targets.length > 0){
+                        var target = creep.pos.findClosestByPath(targets);
+                        if (target) {
+                            ret = creep.transfer(target, RESOURCE_ENERGY);
+                            if (ret == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+                            }
+                            continue;
+                        }
+                    }
+                }
             }
             if (creep.memory.role == 'source2storage'){
+                // 临时测试创建一个的串口命令
+                // Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE],'source2storageTmp',{memory:{role:'source2storage'}})
+
                 // 先找到位置，找到一个临近source，又临近storage的位置
                 // 这里可以手动指定，没必要那么自动化
                 
@@ -38,7 +99,7 @@ var normal2 = {
                         }else{
                             // 如果自己满了，就去storage
                             var storage = creep.room.storage;
-                            if (storage){
+                            if (storage && storage.store.getFreeCapacity() > 0){
                                 ret = creep.transfer(storage,RESOURCE_ENERGY);
                                 if (ret != OK){
                                     console.log('creep.transfer error:'+ret);
@@ -49,7 +110,7 @@ var normal2 = {
                         creep.moveTo(source2storagePos.x,source2storagePos.y);
                     }
                 }else{
-                    console.log('please set Memory.roomInfo['+room.name+']["source2storagePos"] manually,like this: {x:0,y:0}')
+                    console.log('please set Memory.roomInfo["'+room.name+'"]["source2storagePos"] = {x:0,y:0} manually')
                 }
             }
         }

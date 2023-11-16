@@ -43,8 +43,8 @@ var miner = {
             })
             var lastChar = creep.name.slice(-1); // 获取名字的最后一个字符
             var index = parseInt(lastChar, 10)-1; // 尝试将字符转换为数字
-            console.log('lastChar: ' + lastChar + ', index: ' + index);
-            console.log('containers.length: ' + containers.length);
+            // console.log('lastChar: ' + lastChar + ', index: ' + index);
+            // console.log('containers.length: ' + containers.length);
             if (containers.length > (index)) {
                 creep.memory.targetId = containers[index].id;
             }else{
