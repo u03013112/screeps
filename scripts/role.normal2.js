@@ -27,7 +27,9 @@ var normal2 = {
                     var storage = creep.room.storage;
                     if (storage && storage.store[RESOURCE_ENERGY] > 0){
                         ret = creep.withdraw(storage,RESOURCE_ENERGY);
-                        if (ret != OK){
+                        if (ret == ERR_NOT_IN_RANGE){
+                            creep.moveTo(storage, { visualizePathStyle: { stroke: '#ffaa00' } });
+                        }else{
                             console.log('creep.withdraw error:'+ret);
                         }
                     }
