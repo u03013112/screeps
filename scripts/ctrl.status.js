@@ -34,7 +34,73 @@ var status = {
             }
         }
 
-    }
+    },
+    // 每个房间都有一个独立的状态
+    update2: function(room){
+        if(Memory.roomStatus == undefined){
+            Memory.roomStatus = {};
+        }
+        if(Memory.roomStatus[room.name] == undefined){
+            Memory.roomStatus[room.name] = '正常';
+        }
+        if(Memory.roomCreepCreator == undefined){
+            Memory.roomCreepCreator = {};
+        }
+
+        var creeps = room.find(FIND_MY_CREEPS);
+
+        if(Memory.roomStatus[room.name] != '低消耗'){
+            // creep的寿命大概是1500tick，也就是30min到1h，所以最差的情况是循环失败后1h进入低消耗状态
+            if(creeps.length == 0){
+                Memory.roomStatus[room.name] = '低消耗';
+                console.log('状态切换到低消耗');
+                Memory.roomCreepCreator[room.name] = [
+                    {
+                        'role': 'harvester',
+                        'maxCout': 4,
+                        'components':[WORK,CARRY,MOVE],
+                    }
+                ]
+                return;
+            }
+        }
+        if(Memory.roomStatus[room.name] == '低消耗' && creeps.length >= 4){
+            // 如果有storage,link,那么就是正常状态2
+            var storage = room.storage;
+            var links = room.find(FIND_STRUCTURES,{
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_LINK;
+                }
+            })
+            if(storage && links.length ==2){
+                Memory.roomStatus[room.name] = '正常2';
+
+                Memory.roomCreepCreator[room.name] = [
+                    {
+                        'role': 'storage2spawn',
+                        'maxCout': 2,
+                        'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
+                    },{
+                        'role': 'source2storage',
+                        'maxCout': 1,
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                    },{
+                        'role': 'source2link',
+                        'maxCout': 1,
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                    },{
+                        'role': 'link2storage',
+                        'maxCout': 1,
+                        'components':[WORK,CARRY,MOVE],
+                    },{
+                        'role': 'storage2controller',
+                        'maxCout': 6,
+                        'components':[WORK,CARRY,MOVE],
+                    }
+                ]
+            }
+        }
+    },
 };
 
 module.exports = status;

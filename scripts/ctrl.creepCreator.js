@@ -73,21 +73,12 @@ var creepCreator = {
     },
     autoCreat2: function(){
         if (!Memory.creepCreator2){
+            // 这是制造creep的结构，按照顺序制造
             Memory.creepCreator2 = [
                 {
                     'role': 'harvester',
                     'maxCout': 4,
-                    'components':[WORK,CARRY,MOVE]
-                },
-                {
-                    'role': 'upgrader',
-                    'maxCout': 4,
-                    'components':[WORK,CARRY,MOVE]
-                },
-                {
-                    'role': 'builder',
-                    'maxCout': 4,
-                    'components':[WORK,CARRY,MOVE]
+                    'components':[WORK,CARRY,MOVE],
                 }
             ]
         }
