@@ -1,3 +1,5 @@
+var normal2 = require('role.normal2');
+
 var status = {
     // 还是习惯将每个tick调用的函数命名为update
     update: function(){
@@ -41,12 +43,12 @@ var status = {
             Memory.roomStatus = {};
         }
         if(Memory.roomStatus[room.name] == undefined){
-            Memory.roomStatus[room.name] = '正常';
+            Memory.roomStatus[room.name] = '低消耗';
         }
         if(Memory.roomCreepCreator == undefined){
             Memory.roomCreepCreator = {};
         }
-
+        // 状态切换
         var creeps = room.find(FIND_MY_CREEPS);
 
         if(Memory.roomStatus[room.name] != '低消耗'){
@@ -77,13 +79,13 @@ var status = {
 
                 Memory.roomCreepCreator[room.name] = [
                     {
-                        'role': 'storage2spawn',
-                        'maxCout': 2,
-                        'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
-                    },{
                         'role': 'source2storage',
                         'maxCout': 1,
                         'components':[WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                    },{
+                        'role': 'storage2spawn',
+                        'maxCout': 2,
+                        'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
                     },{
                         'role': 'source2link',
                         'maxCout': 1,
@@ -91,14 +93,19 @@ var status = {
                     },{
                         'role': 'link2storage',
                         'maxCout': 1,
-                        'components':[WORK,CARRY,MOVE],
+                        'components':[CARRY,MOVE],
                     },{
                         'role': 'storage2controller',
                         'maxCout': 6,
-                        'components':[WORK,CARRY,MOVE],
+                        'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                     }
                 ]
             }
+        }
+
+        // 对应状态update
+        if(Memory.roomStatus[room.name] == '正常2'){
+            normal2.update(room);
         }
     },
 };

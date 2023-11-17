@@ -8,11 +8,9 @@ var tower = require('struct.tower');
 var creepCreator = require('ctrl.creepCreator');
 var status = require('ctrl.status');
 
-var normal2 = require('role.normal2');
-
 module.exports.loop = function () {
 
-    status.update();
+    // status.update();
 
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -64,6 +62,6 @@ module.exports.loop = function () {
     var rooms = Game.rooms;
     for(var roomName in rooms){
         var room = rooms[roomName];
-        normal2.update(room);
+        status.update2(room);
     }
 }

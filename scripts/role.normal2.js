@@ -201,6 +201,7 @@ var normal2 = {
                 }
             }
             if (creep.memory.role == 'storage2controller'){
+                // Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE],'storage2controllerTmp',{memory:{role:'storage2controller'}})
                 if(creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
                     creep.memory.upgrading = false;
                     creep.say('🔄 harvest');
@@ -246,7 +247,6 @@ var normal2 = {
             if(link2storagePos){
                 linkTo = new RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
             }
-            // console.log('linkFrom: ' + linkFrom + ', linkTo: ' + linkTo);
             if(linkFrom && linkTo){
                 if (linkFrom.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                     linkFrom.transferEnergy(linkTo);
