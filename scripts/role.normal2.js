@@ -30,7 +30,7 @@ var normal2 = {
                         if (ret == ERR_NOT_IN_RANGE){
                             creep.moveTo(storage, { visualizePathStyle: { stroke: '#ffaa00' } });
                         }else{
-                            console.log('creep.withdraw error:'+ret);
+                            // console.log('creep.withdraw error:'+ret);
                         }
                     }
                 }else if (creep.memory.state === 'transfering') {
@@ -179,7 +179,7 @@ var normal2 = {
                                 if (link && link.store.getUsedCapacity(RESOURCE_ENERGY) > 0){
                                     ret = creep.withdraw(link,RESOURCE_ENERGY);
                                     if (ret != OK){
-                                        console.log('creep.withdraw error:'+ret);
+                                        // console.log('creep.withdraw error:'+ret);
                                     }
                                 }
                             }
@@ -223,7 +223,7 @@ var normal2 = {
                         if (ret == ERR_NOT_IN_RANGE){
                             creep.moveTo(storage, { visualizePathStyle: { stroke: '#ffaa00' } });
                         }else{
-                            console.log('creep.withdraw error:'+ret);
+                            // console.log('creep.withdraw error:'+ret);
                         }
                     }
                 }
