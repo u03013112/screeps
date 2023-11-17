@@ -38,20 +38,12 @@ harvester的逻辑需要重写，目前是每个creeper存储目标，会导致�
 
 ## 临时console命令
 
-修改制造creep的组件
-
 ```js
-Memory.creepCreator.components = ['work','carry','move']
-Memory.creepCreator.components = ['work','carry','move','work','carry','move']
-Memory.creepCreator.components = ['work','work','carry','carry','carry','carry','move','move','move']
+Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE],'builderTmp',{memory:{role:'builder'}})
 ```
 
-修改制造creep的数量
 
 ```js
-Memory.creepCreator.maxCout.builder = 0
-Memory.creepCreator.maxCout.harvester = 0
-Memory.creepCreator.maxCout.upgrader = 0
-``` 
-
+Memory.roomInfo["E38S47"]["link2storagePos"] = {x:28,y:22}
+```
 

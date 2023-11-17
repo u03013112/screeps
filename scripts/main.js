@@ -27,18 +27,18 @@ module.exports.loop = function () {
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
+        // if(creep.memory.role == 'upgrader') {
+        //     roleUpgrader.run(creep);
+        // }
         if(creep.memory.role == 'builder'){
             roleBuilder.run(creep)
         }
         if(creep.memory.role == 'signer'){
             signer.run(creep)
         }
-        if(creep.memory.role == 'miner'){
-            miner.run(creep)
-        }
+        // if(creep.memory.role == 'miner'){
+        //     miner.run(creep)
+        // }
     }
 
     var towers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {
