@@ -56,6 +56,9 @@ var creepCreator = {
                             memory: {role: role}
                         });
                     break;
+                }else{
+                    console.log('try to spawn: '+ newName + '>' + testIfCanSpawn);
+                
                 }
             }
         }
