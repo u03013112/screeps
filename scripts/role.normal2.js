@@ -246,7 +246,7 @@ var normal2 = {
                 linkTo = new RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
             }
             if(linkFrom && linkTo){
-                if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
+                if (linkFrom.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                     linkFrom.transferEnergy(linkTo);
                 }
             }
