@@ -58,7 +58,8 @@ var normal2 = {
                     targets = creep.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType === STRUCTURE_TOWER) &&
-                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                                // 不用补满
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 500;
                         }
                     });
                     if(targets.length > 0){

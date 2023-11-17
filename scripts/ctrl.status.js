@@ -81,7 +81,7 @@ var status = {
                     {
                         'role': 'source2storage',
                         'maxCout': 1,
-                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
                     },{
                         'role': 'storage2spawn',
                         'maxCout': 2,
@@ -89,14 +89,14 @@ var status = {
                     },{
                         'role': 'source2link',
                         'maxCout': 1,
-                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
                     },{
                         'role': 'link2storage',
                         'maxCout': 1,
                         'components':[CARRY,MOVE],
                     },{
                         'role': 'storage2controller',
-                        'maxCout': 6,
+                        'maxCout': 3,
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                     }
                 ]
