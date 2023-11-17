@@ -91,10 +91,10 @@ var normal2 = {
                             var sources = creep.room.find(FIND_SOURCES);
                             if (sources.length > 0){
                                 var source = creep.pos.findClosestByPath(sources);
-                                if (source){
+                                if (source && source.energy > 0){
                                     ret = creep.harvest(source);
                                     if (ret != OK){
-                                        console.log('creep.harvest error:'+ret);
+                                        console.log('source2storage.harvest error:'+ret);
                                     }
                                 }
                             }
@@ -128,10 +128,10 @@ var normal2 = {
                             var sources = creep.room.find(FIND_SOURCES);
                             if (sources.length > 0){
                                 var source = creep.pos.findClosestByPath(sources);
-                                if (source){
+                                if (source && source.energy > 0){
                                     ret = creep.harvest(source);
                                     if (ret != OK){
-                                        console.log('creep.harvest error:'+ret);
+                                        console.log('source2link.harvest error:'+ret);
                                     }
                                 }
                             }
