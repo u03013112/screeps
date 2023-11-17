@@ -15,7 +15,7 @@ var normal2 = {
                 if (creep.memory.state === undefined) {
                     creep.memory.state = 'harvesting';
                 }
-                if (creep.memory.state === 'harvesting' && creep.store.getFreeCapacity() === 0) {
+                if (creep.memory.state === 'harvesting' && creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
                     creep.memory.state = 'transfering';
                     creep.say('⚡ transfer');
                 } else if (creep.memory.state === 'transfering' && creep.store[RESOURCE_ENERGY] === 0) {
@@ -86,7 +86,7 @@ var normal2 = {
                     if (creep.pos.x == source2storagePos.x && creep.pos.y == source2storagePos.y){
                         // 在目标位置，开始工作
                         // 如果自己还有空位，就去挖矿
-                        if (creep.store.getFreeCapacity() > 0){
+                        if (creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                             // 找到最近的source
                             var sources = creep.room.find(FIND_SOURCES);
                             if (sources.length > 0){
@@ -101,7 +101,7 @@ var normal2 = {
                         }else{
                             // 如果自己满了，就去storage
                             var storage = creep.room.storage;
-                            if (storage && storage.store.getFreeCapacity() > 0){
+                            if (storage && storage.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                                 ret = creep.transfer(storage,RESOURCE_ENERGY);
                                 if (ret != OK){
                                     console.log('creep.transfer error:'+ret);
@@ -123,7 +123,7 @@ var normal2 = {
                     if (creep.pos.x == source2linkPos.x && creep.pos.y == source2linkPos.y){
                         // 在目标位置，开始工作
                         // 如果自己还有空位，就去挖矿
-                        if (creep.store.getFreeCapacity() > 0){
+                        if (creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                             // 找到最近的source
                             var sources = creep.room.find(FIND_SOURCES);
                             if (sources.length > 0){
@@ -143,10 +143,8 @@ var normal2 = {
                                 }
                             })
                             if (links.length > 0){
-                                console.log('links.length:'+links.length);
                                 var link = creep.pos.findClosestByPath(links);
-                                console.log('link:'+link+',link.store.getFreeCapacity():'+link.store.getFreeCapacity());
-                                if (link && link.store.getFreeCapacity() > 0){
+                                if (link && link.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                                     ret = creep.transfer(link,RESOURCE_ENERGY);
                                     if (ret != OK){
                                         console.log('creep.transfer error:'+ret);
@@ -168,7 +166,7 @@ var normal2 = {
                     if (creep.pos.x == link2storagePos.x && creep.pos.y == link2storagePos.y){
                         // 在目标位置，开始工作
                         // 如果自己还有空位，就去挖矿
-                        if (creep.store.getFreeCapacity() > 0){
+                        if (creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                             // 找到最近的link
                             var links = creep.room.find(FIND_STRUCTURES,{
                                 filter: (structure) => {
@@ -187,7 +185,7 @@ var normal2 = {
                         }else{
                             // 如果自己满了，就去storage
                             var storage = creep.room.storage;
-                            if (storage && storage.store.getFreeCapacity() > 0){
+                            if (storage && storage.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                                 ret = creep.transfer(storage,RESOURCE_ENERGY);
                                 if (ret != OK){
                                     console.log('creep.transfer error:'+ret);
@@ -206,7 +204,7 @@ var normal2 = {
                     creep.memory.upgrading = false;
                     creep.say('🔄 harvest');
                 }
-                if(!creep.memory.upgrading && creep.store.getFreeCapacity() == 0) {
+                if(!creep.memory.upgrading && creep.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
                     creep.memory.upgrading = true;
                     creep.say('⚡ upgrade');
                 }
@@ -248,7 +246,7 @@ var normal2 = {
             //     linkTo = RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
             // }
             // if(linkFrom && linkTo){
-            //     if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity() > 0){
+            //     if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
             //         linkFrom.transferEnergy(linkTo);
             //     }
             // }
