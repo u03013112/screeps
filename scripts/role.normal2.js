@@ -116,6 +116,7 @@ var normal2 = {
                 }
             }
             if (creep.memory.role == 'source2link'){
+                // Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE],'source2linkTmp',{memory:{role:'source2link'}})
                 var source2linkPos = Memory.roomInfo[room.name]['source2linkPos']
                 if(source2linkPos){
                     // 先判断是否已经在目标位置
@@ -232,21 +233,22 @@ var normal2 = {
                 return structure.structureType == STRUCTURE_LINK;
             }
         })
+        if (links.length == 2){
+            var linkFrom = undefined;
+            var linkTo = undefined;
 
-        var linkFrom = undefined;
-        var linkTo = undefined;
-
-        var source2linkPos = Memory.roomInfo[room.name]['source2linkPos']
-        if(source2linkPos){
-            linkFrom = RoomPosition(source2linkPos.x,source2linkPos.y,room.name).findClosestByPath(links);
-        }
-        var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
-        if(link2storagePos){
-            linkTo = RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
-        }
-        if(linkFrom && linkTo){
-            if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity() > 0){
-                linkFrom.transferEnergy(linkTo);
+            var source2linkPos = Memory.roomInfo[room.name]['source2linkPos']
+            if(source2linkPos){
+                linkFrom = RoomPosition(source2linkPos.x,source2linkPos.y,room.name).findClosestByPath(links);
+            }
+            var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
+            if(link2storagePos){
+                linkTo = RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
+            }
+            if(linkFrom && linkTo){
+                if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity() > 0){
+                    linkFrom.transferEnergy(linkTo);
+                }
             }
         }
     },
