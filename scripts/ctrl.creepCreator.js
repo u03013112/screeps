@@ -70,7 +70,11 @@ var creepCreator = {
                 }
             }
         }
-        var spawningSpawns = _.filter(Game.spawns, (spawn) => spawn.spawning != null);
+        var spawningSpawns = room.find(FIND_MY_SPAWNS, {
+            filter: (spawn) => {
+                return spawn.spawning != null;
+            }
+        });
         for (var spawningSpawn of spawningSpawns) {
             var spawningCreep = Game.creeps[spawningSpawn.spawning.name];
             spawningSpawn.room.visual.text(
