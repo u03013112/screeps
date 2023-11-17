@@ -234,22 +234,22 @@ var normal2 = {
             }
         })
         if (links.length == 2){
-            // var linkFrom = undefined;
-            // var linkTo = undefined;
+            var linkFrom = undefined;
+            var linkTo = undefined;
 
-            // var source2linkPos = Memory.roomInfo[room.name]['source2linkPos']
-            // if(source2linkPos){
-            //     linkFrom = RoomPosition(source2linkPos.x,source2linkPos.y,room.name).findClosestByPath(links);
-            // }
-            // var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
-            // if(link2storagePos){
-            //     linkTo = RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
-            // }
-            // if(linkFrom && linkTo){
-            //     if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
-            //         linkFrom.transferEnergy(linkTo);
-            //     }
-            // }
+            var source2linkPos = Memory.roomInfo[room.name]['source2linkPos']
+            if(source2linkPos){
+                linkFrom = new RoomPosition(source2linkPos.x,source2linkPos.y,room.name).findClosestByPath(links);
+            }
+            var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
+            if(link2storagePos){
+                linkTo = new RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
+            }
+            if(linkFrom && linkTo){
+                if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
+                    linkFrom.transferEnergy(linkTo);
+                }
+            }
         }
     },
 };
