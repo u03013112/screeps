@@ -176,7 +176,7 @@ var normal2 = {
                             })
                             if (links.length > 0){
                                 var link = creep.pos.findClosestByPath(links);
-                                if (link && link.store.getUsedCapacity() > 0){
+                                if (link && link.store.getUsedCapacity(RESOURCE_ENERGY) > 0){
                                     ret = creep.withdraw(link,RESOURCE_ENERGY);
                                     if (ret != OK){
                                         console.log('creep.withdraw error:'+ret);
