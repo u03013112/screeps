@@ -143,7 +143,9 @@ var normal2 = {
                                 }
                             })
                             if (links.length > 0){
+                                console.log('links.length:'+links.length);
                                 var link = creep.pos.findClosestByPath(links);
+                                console.log('link:'+link+',link.store.getFreeCapacity():'+link.store.getFreeCapacity());
                                 if (link && link.store.getFreeCapacity() > 0){
                                     ret = creep.transfer(link,RESOURCE_ENERGY);
                                     if (ret != OK){
