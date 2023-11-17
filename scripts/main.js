@@ -21,8 +21,8 @@ module.exports.loop = function () {
         }
     }
 
-    creepCreator.autoCreat();
-    miner.autoCreat();
+    // creepCreator.autoCreat();
+    // miner.autoCreat();
 
     if(Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];

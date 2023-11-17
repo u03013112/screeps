@@ -159,10 +159,94 @@ var normal2 = {
                 }
             }
             if (creep.memory.role == 'link2storage'){
-
+                var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
+                if(link2storagePos){
+                    // 先判断是否已经在目标位置
+                    if (creep.pos.x == link2storagePos.x && creep.pos.y == link2storagePos.y){
+                        // 在目标位置，开始工作
+                        // 如果自己还有空位，就去挖矿
+                        if (creep.store.getFreeCapacity() > 0){
+                            // 找到最近的link
+                            var links = creep.room.find(FIND_STRUCTURES,{
+                                filter: (structure) => {
+                                    return structure.structureType == STRUCTURE_LINK;
+                                }
+                            })
+                            if (links.length > 0){
+                                var link = creep.pos.findClosestByPath(links);
+                                if (link && link.store.getUsedCapacity() > 0){
+                                    ret = creep.withdraw(link,RESOURCE_ENERGY);
+                                    if (ret != OK){
+                                        console.log('creep.withdraw error:'+ret);
+                                    }
+                                }
+                            }
+                        }else{
+                            // 如果自己满了，就去storage
+                            var storage = creep.room.storage;
+                            if (storage && storage.store.getFreeCapacity() > 0){
+                                ret = creep.transfer(storage,RESOURCE_ENERGY);
+                                if (ret != OK){
+                                    console.log('creep.transfer error:'+ret);
+                                }
+                            }
+                        }
+                    }else{
+                        creep.moveTo(link2storagePos.x,link2storagePos.y);
+                    }
+                }else{
+                    console.log('please set Memory.roomInfo["'+room.name+'"]["link2storagePos"] = {x:0,y:0} manually')
+                }
             }
             if (creep.memory.role == 'storage2controller'){
+                if(creep.memory.upgrading && creep.store[RESOURCE_ENERGY] == 0) {
+                    creep.memory.upgrading = false;
+                    creep.say('🔄 harvest');
+                }
+                if(!creep.memory.upgrading && creep.store.getFreeCapacity() == 0) {
+                    creep.memory.upgrading = true;
+                    creep.say('⚡ upgrade');
+                }
+        
+                if(creep.memory.upgrading) {
+                    if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                }
+                else {
+                    var storage = creep.room.storage;
+                    if (storage && storage.store.getUsedCapacity() > 0){
+                        ret = creep.withdraw(storage,RESOURCE_ENERGY);
+                        if (ret == ERR_NOT_IN_RANGE){
+                            creep.moveTo(storage, { visualizePathStyle: { stroke: '#ffaa00' } });
+                        }else{
+                            console.log('creep.withdraw error:'+ret);
+                        }
+                    }
+                }
+            }
+        }
 
+        var links = room.find(FIND_STRUCTURES,{
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_LINK;
+            }
+        })
+
+        var linkFrom = undefined;
+        var linkTo = undefined;
+
+        var source2linkPos = Memory.roomInfo[room.name]['source2linkPos']
+        if(source2linkPos){
+            linkFrom = RoomPosition(source2linkPos.x,source2linkPos.y,room.name).findClosestByPath(links);
+        }
+        var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
+        if(link2storagePos){
+            linkTo = RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
+        }
+        if(linkFrom && linkTo){
+            if (linkFrom.store.getUsedCapacity() > 0 && linkTo.store.getFreeCapacity() > 0){
+                linkFrom.transferEnergy(linkTo);
             }
         }
     },
