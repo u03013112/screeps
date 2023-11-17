@@ -59,7 +59,7 @@ var normal2 = {
                         filter: (structure) => {
                             return (structure.structureType === STRUCTURE_TOWER) &&
                                 // 不用补满
-                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 500;
+                                structure.store.getFreeCapacity(RESOURCE_ENERGY) > 800;
                         }
                     });
                     if(targets.length > 0){
