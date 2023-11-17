@@ -9,18 +9,12 @@ var creepCreator = require('ctrl.creepCreator');
 var status = require('ctrl.status');
 
 module.exports.loop = function () {
-
-    // status.update();
-
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-
-    // creepCreator.autoCreat();
-    // miner.autoCreat();
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
