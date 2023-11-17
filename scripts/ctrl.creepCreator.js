@@ -36,8 +36,16 @@ var creepCreator = {
             var role = creator.role;
             var maxCout = creator.maxCout;
             var components = creator.components;
-            var creeps = _.filter(Game.creeps, (creep) => creep.memory.role == role);
-            var spawns = _.filter(Game.spawns, (spawn) => spawn.spawning == null);
+            var creeps = room.find(FIND_MY_CREEPS, {
+                filter: (creep) => {
+                    return creep.memory.role == role;
+                }
+            });
+            var spawns = room.find(FIND_MY_SPAWNS, {
+                filter: (spawn) => {
+                    return spawn.spawning == null;
+                }
+            });
             if(creeps.length < maxCout && spawns.length > 0) {
                 var newName = nameManager.getName(role);
                 if (newName == '') {
