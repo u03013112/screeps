@@ -30,31 +30,20 @@ var creepCreator = {
             }
         }
     },
-    autoCreat: function(){
-        // 读取memory中的配置，自动创建
-        // 在Memory.creepCreator中配置
-        // 兼容旧版本，初始化配置
-        if (!Memory.creepCreator){
-            Memory.creepCreator = {
-                'maxCout':{
-                    'harvester': 4,
-                    'upgrader': 4,
-                    'builder': 4
-                },
-                'components':[WORK,CARRY,MOVE]
-            };
-        }
-        for(var role in Memory.creepCreator.maxCout){
-            var maxCout = Memory.creepCreator.maxCout[role];
+    update: function(room){
+        var creatorList = Memory.roomCreepCreator[room.name]
+        for (var creator of creatorList){
+            var role = creator.role;
+            var maxCout = creator.maxCout;
+            var components = creator.components;
             var creeps = _.filter(Game.creeps, (creep) => creep.memory.role == role);
             var spawns = _.filter(Game.spawns, (spawn) => spawn.spawning == null);
             if(creeps.length < maxCout && spawns.length > 0) {
                 var newName = nameManager.getName(role);
                 if (newName == '') {
                     console.log('No name available for role: ' + role);
-                    return;
+                    break;
                 }
-                var components = Memory.creepCreator.components;
                 var testIfCanSpawn = spawns[0].spawnCreep(components, newName,
                     {
                         memory: {role: role},
@@ -66,9 +55,18 @@ var creepCreator = {
                         {
                             memory: {role: role}
                         });
-                    return;
+                    break;
                 }
             }
+        }
+        var spawningSpawns = _.filter(Game.spawns, (spawn) => spawn.spawning != null);
+        for (var spawningSpawn of spawningSpawns) {
+            var spawningCreep = Game.creeps[spawningSpawn.spawning.name];
+            spawningSpawn.room.visual.text(
+                '🛠️' + spawningCreep.memory.role,
+                spawningSpawn.pos.x + 1,
+                spawningSpawn.pos.y,
+                {align: 'left', opacity: 0.8});
         }
     },
     autoCreat2: function(){
