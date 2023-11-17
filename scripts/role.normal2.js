@@ -160,6 +160,7 @@ var normal2 = {
                 }
             }
             if (creep.memory.role == 'link2storage'){
+                // Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE],'link2storageTmp',{memory:{role:'link2storage'}})
                 var link2storagePos = Memory.roomInfo[room.name]['link2storagePos']
                 if(link2storagePos){
                     // 先判断是否已经在目标位置
@@ -245,7 +246,7 @@ var normal2 = {
             if(link2storagePos){
                 linkTo = new RoomPosition(link2storagePos.x,link2storagePos.y,room.name).findClosestByPath(links);
             }
-            console.log('linkFrom: ' + linkFrom + ', linkTo: ' + linkTo);
+            // console.log('linkFrom: ' + linkFrom + ', linkTo: ' + linkTo);
             if(linkFrom && linkTo){
                 if (linkFrom.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                     linkFrom.transferEnergy(linkTo);
