@@ -96,7 +96,7 @@ var status = {
                         'components':[CARRY,MOVE],
                     },{
                         'role': 'storage2controller',
-                        'maxCout': 3,
+                        'maxCout': 4,
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                     }
                 ]
