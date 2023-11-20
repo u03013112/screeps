@@ -41,6 +41,7 @@ harvester的逻辑需要重写，目前是每个creeper存储目标，会导致�
 ```js
 Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE],'builderTmp',{memory:{role:'builder'}})
 Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE],'upgraderTmp',{memory:{role:'upgrader'}})
+Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE],'harvesterTmp',{memory:{role:'harvester'}})
 ```
 
 
