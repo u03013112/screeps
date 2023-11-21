@@ -2,10 +2,13 @@ var tower = {
     run: function(tower) {
         // 简单版本，目前抄https://raw.githubusercontent.com/screeps/tutorial-scripts/master/section5/main.js
 
-        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
-        if(closestHostile) {
-            tower.attack(closestHostile);
+        var hostiles = tower.room.find(FIND_HOSTILE_CREEPS);
+        if(hostiles.length > 0) {
+            // 随机攻击一个敌人，防止有加血的敌人
+            var index = Math.floor(Math.random() * hostiles.length);
+            tower.attack(hostiles[index]);
+
             return;
         }
 
