@@ -36,8 +36,8 @@ var creepCreator = {
                         });
                     break;
                 }else{
-                    console.log('try to spawn: '+ newName + '>' + testIfCanSpawn);
-                
+                    console.log('try to spawn: '+ newName + ',' + testIfCanSpawn);
+                    break;
                 }
             }
         }
