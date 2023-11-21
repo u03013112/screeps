@@ -74,7 +74,8 @@ var status = {
                     return structure.structureType == STRUCTURE_LINK;
                 }
             })
-            if(storage && links.length ==2){
+            // 暂时这么写，之后3个link都建好了再改
+            if(storage && links.length >=2){
                 Memory.roomStatus[room.name] = '正常2';
 
                 Memory.roomCreepCreator[room.name] = [
@@ -96,7 +97,11 @@ var status = {
                         'components':[CARRY,MOVE],
                     },{
                         'role': 'storage2controller',
-                        'maxCout': 6,
+                        'maxCout': 4,
+                        'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+                    },{
+                        'role':'storage2builder',
+                        'maxCout': 2,
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                     }
                 ]

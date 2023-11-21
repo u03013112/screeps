@@ -47,6 +47,7 @@ Game.spawns['Spawn1'].spawnCreep([CARRY,CARRY,MOVE],'harvesterTmp',{memory:{role
 
 ```js
 Memory.roomInfo["E38S47"]["link2storagePos"] = {x:28,y:22}
+Memory.roomInfo["E38S47"]["source2storagePos"] = {x:30,y:22}
 Memory.roomStatus["E38S47"] = '低消耗'
 ```
 
