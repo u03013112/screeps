@@ -63,7 +63,10 @@ var normal2 = {
                         }
                     });
                     if(targets.length > 0){
-                        var target = creep.pos.findClosestByPath(targets);
+                        // 找到能量最少的
+                        targets.sort((a,b) => a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]);
+
+                        var target = targets[0];
                         if (target) {
                             ret = creep.transfer(target, RESOURCE_ENERGY);
                             if (ret == ERR_NOT_IN_RANGE) {
