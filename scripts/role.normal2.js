@@ -1,3 +1,5 @@
+var harvest = require('role.harvest');
+
 // normal2 状态下的creep的update
 var normal2 = {
     update:function(room){
