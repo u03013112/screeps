@@ -231,6 +231,36 @@ var normal2 = {
 
                 // creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             }
+            if (creep.memory.role == 'storage2builder'){
+                if(creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
+                    creep.memory.building = false;
+                    creep.say('🔄 harvest');
+                }
+                if(!creep.memory.building && creep.store.getFreeCapacity() == 0) {
+                    creep.memory.building = true;
+                    creep.say('🚧 build');
+                }
+        
+                if(creep.memory.building) {
+                    var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+                    if(targets.length) {
+                        if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+                            creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                        }
+                    }
+                }
+                else {
+                    var storage = creep.room.storage;
+                    if (storage && storage.store.getUsedCapacity() > 0){
+                        ret = creep.withdraw(storage,RESOURCE_ENERGY);
+                        if (ret == ERR_NOT_IN_RANGE){
+                            creep.moveTo(storage, { visualizePathStyle: { stroke: '#ffaa00' } });
+                        }else{
+                            // console.log('creep.withdraw error:'+ret);
+                        }
+                    }
+                }
+            }
         }
 
         var links = room.find(FIND_STRUCTURES,{
