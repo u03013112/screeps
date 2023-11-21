@@ -1,4 +1,4 @@
-var harvest = require('role.harvest');
+var harvest = require('ctrl.harvest');
 
 // normal2 状态下的creep的update
 var normal2 = {
