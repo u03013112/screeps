@@ -5,9 +5,17 @@ var tower = {
 
         var hostiles = tower.room.find(FIND_HOSTILE_CREEPS);
         if(hostiles.length > 0) {
-            // 随机攻击一个敌人，防止有加血的敌人
-            var index = Math.floor(Math.random() * hostiles.length);
-            tower.attack(hostiles[index]);
+            // 优先攻击有治疗能力的敌人
+            var healer = _.filter(hostiles, (creep) => creep.getActiveBodyparts(HEAL) > 0);
+            if(healer.length > 0){
+                tower.attack(healer[0]);
+                return;
+            }else{
+                // 随机攻击一个敌人
+                var index = Math.floor(Math.random() * hostiles.length);
+                tower.attack(hostiles[index]);
+                return;
+            }
 
             return;
         }
