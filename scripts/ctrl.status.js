@@ -85,7 +85,7 @@ var status = {
                         'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
                     },{
                         'role': 'storage2spawn',
-                        'maxCout': 1,
+                        'maxCout': 2,
                         'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
                     },{
                         'role': 'source2link',
