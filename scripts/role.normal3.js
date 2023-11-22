@@ -313,4 +313,4 @@ var normal3 = {
     },
 };
 
-module.exports = normal2;
+module.exports = normal3;
