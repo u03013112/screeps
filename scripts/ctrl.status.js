@@ -101,7 +101,7 @@ var status = {
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                     },{
                         'role':'storage2builder',
-                        'maxCout': 2,
+                        'maxCout': 0,
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                     }
                 ]
