@@ -129,7 +129,7 @@ var status = {
                         'components':[CARRY,MOVE],
                     },{
                         'role': 'storage2controller',
-                        'maxCout': 1,
+                        'maxCout': 2,
                         'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
                     },{
                         'role':'storage2builder',
