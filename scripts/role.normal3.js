@@ -303,7 +303,7 @@ var normal3 = {
 
             if(linkFrom && linkTo && linkTo2){
                 // 如果linkTo2有空位，就优先往linkTo2里面放
-                if (linkFrom.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && linkTo2.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
+                if (linkFrom.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && linkTo2.store.getFreeCapacity(RESOURCE_ENERGY) > 50){
                     linkFrom.transferEnergy(linkTo2);
                 }else if (linkFrom.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && linkTo.store.getFreeCapacity(RESOURCE_ENERGY) > 0){
                     linkFrom.transferEnergy(linkTo);
