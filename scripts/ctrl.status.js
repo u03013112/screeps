@@ -75,7 +75,7 @@ var status = {
                 }
             })
             // 暂时这么写，之后3个link都建好了再改
-            if(storage && links.length >=2){
+            if(storage && links.length ==2){
                 Memory.roomStatus[room.name] = '正常2';
 
                 Memory.roomCreepCreator[room.name] = [
@@ -99,6 +99,37 @@ var status = {
                         'role': 'storage2controller',
                         'maxCout': 4,
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+                    },{
+                        'role':'storage2builder',
+                        'maxCout': 0,
+                        'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+                    }
+                ]
+            }
+            if(storage && links.length ==3){
+                Memory.roomStatus[room.name] = '正常3';
+
+                Memory.roomCreepCreator[room.name] = [
+                    {
+                        'role': 'source2storage',
+                        'maxCout': 1,
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                    },{
+                        'role': 'storage2spawn',
+                        'maxCout': 2,
+                        'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
+                    },{
+                        'role': 'source2link',
+                        'maxCout': 1,
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+                    },{
+                        'role': 'link2storage',
+                        'maxCout': 1,
+                        'components':[CARRY,MOVE],
+                    },{
+                        'role': 'storage2controller',
+                        'maxCout': 1,
+                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
                     },{
                         'role':'storage2builder',
                         'maxCout': 0,
