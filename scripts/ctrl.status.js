@@ -1,4 +1,5 @@
 var normal2 = require('role.normal2');
+var normal3 = require('role.normal3');
 
 var status = {
     // 还是习惯将每个tick调用的函数命名为update
@@ -142,6 +143,9 @@ var status = {
         // 对应状态update
         if(Memory.roomStatus[room.name] == '正常2'){
             normal2.update(room);
+        }
+        if(Memory.roomStatus[room.name] == '正常3'){
+            normal3.update(room);
         }
     },
 };
