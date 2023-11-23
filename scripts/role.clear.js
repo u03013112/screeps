@@ -38,6 +38,7 @@ var clear = {
                     }
                 });
             }
+            console.log('target: ' + target);
 
             if (target) {
                 if (creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
