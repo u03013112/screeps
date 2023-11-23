@@ -3,6 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var signer = require('role.signer');
 var miner = require('role.miner');
+var clear = require('role.clear');
 
 var tower = require('struct.tower');
 var creepCreator = require('ctrl.creepCreator');
@@ -30,9 +31,12 @@ module.exports.loop = function () {
         if(creep.memory.role == 'signer'){
             signer.run(creep)
         }
-        // if(creep.memory.role == 'miner'){
-        //     miner.run(creep)
-        // }
+        if(creep.memory.role == 'miner'){
+            miner.run(creep)
+        }
+        if(creep.memory.role == 'clear'){
+            clear.run(creep)
+        }
     }
 
     var towers = Game.spawns['Spawn1'].room.find(FIND_STRUCTURES, {

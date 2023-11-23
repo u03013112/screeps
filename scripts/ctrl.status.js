@@ -135,6 +135,10 @@ var status = {
                         'role':'storage2builder',
                         'maxCout': 0,
                         'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+                    },{
+                        'role':'clear',
+                        'maxCout': 1,
+                        'components':[CARRY,CARRY,MOVE],
                     }
                 ]
             }
