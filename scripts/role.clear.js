@@ -41,9 +41,16 @@ var clear = {
             console.log('target: ' + target);
 
             if (target) {
-                if (creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                var ret = creep.withdraw(target, RESOURCE_ENERGY);
+                if (ret === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffaa00' } });
+                }else if (ret === OK) {
+                    // creep.say('🔄 harvest');
+                }else{ // 其他错误
+                    creep.say('❌ err');
+                    console.log('clear err: ' + ret);
                 }
+
                 return;
             }
         }else if (creep.memory.state === 'transfering') {
