@@ -17,17 +17,29 @@ var clear = {
             // 墓碑、掉落的资源、container的资源
             var target = undefined;
 
+            // 掉落的资源
+            target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+            if (target) {
+                var ret = creep.pickup(target);
+                if (ret === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target, { visualizePathStyle: { stroke: '#ffaa00' } });
+                }else if (ret === OK) {
+                    // creep.say('🔄 harvest');
+                }else{ // 其他错误
+                    creep.say('❌ err');
+                    console.log('clear err: ' + ret);
+                }
+
+                return;
+            }
+            
+
             // 墓碑
             target = creep.pos.findClosestByRange(FIND_TOMBSTONES, {
                 filter: (tombstone) => {
                     return tombstone.store.getUsedCapacity() > 0;
                 }
             });
-
-            // 掉落的资源
-            if (!target) {
-                target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-            }
 
             // container的资源
             if (!target) {
@@ -38,7 +50,6 @@ var clear = {
                     }
                 });
             }
-            console.log('target: ' + target);
 
             if (target) {
                 var ret = creep.withdraw(target, RESOURCE_ENERGY);
