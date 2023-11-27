@@ -1,8 +1,5 @@
 var tower = {
     run: function(tower) {
-        // 简单版本，目前抄https://raw.githubusercontent.com/screeps/tutorial-scripts/master/section5/main.js
-
-
         var hostiles = tower.room.find(FIND_HOSTILE_CREEPS);
         if(hostiles.length > 0) {
             // 优先攻击有治疗能力的敌人
@@ -25,7 +22,8 @@ var tower = {
             filter: (structure) => structure.hits < (structure.hitsMax - 800)
         });
         damagedStructs.sort((a,b) => a.hits - b.hits);
-        if(damagedStructs.length > 0){
+        // 保留100的能量
+        if(damagedStructs.length > 0 && tower.store[RESOURCE_ENERGY] > 100){
             tower.repair(damagedStructs[0]);
             return;
         }
