@@ -10,6 +10,14 @@ var creepCreator = require('ctrl.creepCreator');
 var status = require('ctrl.status');
 
 module.exports.loop = function () {
+
+    var rooms = Game.rooms;
+    for(var roomName in rooms){
+        var room = rooms[roomName];
+        status.update2(room);
+        creepCreator.update(room);
+    }
+    
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -47,13 +55,4 @@ module.exports.loop = function () {
     for(var name in towers){
         tower.run(towers[name]);
     }
-
-    var rooms = Game.rooms;
-    for(var roomName in rooms){
-        var room = rooms[roomName];
-        status.update2(room);
-        creepCreator.update(room);
-    }
-
-    
 }
