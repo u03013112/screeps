@@ -45,6 +45,7 @@ var status = {
         }
         if(Memory.roomStatus[room.name] == undefined){
             Memory.roomStatus[room.name] = '低消耗';
+            Memory.roomCreepCreator = {};
             Memory.roomCreepCreator[room.name] = [
                 {
                     'role': 'harvester',
@@ -52,9 +53,6 @@ var status = {
                     'components':[WORK,CARRY,MOVE],
                 }
             ]
-        }
-        if(Memory.roomCreepCreator == undefined){
-            Memory.roomCreepCreator = {};
         }
         // 状态切换
         var creeps = room.find(FIND_MY_CREEPS);
@@ -74,90 +72,90 @@ var status = {
                 return;
             }
         }
-        if(Memory.roomStatus[room.name] == '低消耗' && creeps.length >= 4){
-            // 如果有storage,link,那么就是正常状态2
-            var storage = room.storage;
-            var links = room.find(FIND_STRUCTURES,{
-                filter: (structure) => {
-                    return structure.structureType == STRUCTURE_LINK;
-                }
-            })
-            // 暂时这么写，之后3个link都建好了再改
-            if(storage && links.length ==2){
-                Memory.roomStatus[room.name] = '正常2';
+        // if(Memory.roomStatus[room.name] == '低消耗' && creeps.length >= 4){
+        //     // 如果有storage,link,那么就是正常状态2
+        //     var storage = room.storage;
+        //     var links = room.find(FIND_STRUCTURES,{
+        //         filter: (structure) => {
+        //             return structure.structureType == STRUCTURE_LINK;
+        //         }
+        //     })
+        //     // 暂时这么写，之后3个link都建好了再改
+        //     if(storage && links.length ==2){
+        //         Memory.roomStatus[room.name] = '正常2';
 
-                Memory.roomCreepCreator[room.name] = [
-                    {
-                        'role': 'source2storage',
-                        'maxCout': 1,
-                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
-                    },{
-                        'role': 'storage2spawn',
-                        'maxCout': 2,
-                        'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
-                    },{
-                        'role': 'source2link',
-                        'maxCout': 1,
-                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
-                    },{
-                        'role': 'link2storage',
-                        'maxCout': 1,
-                        'components':[CARRY,MOVE],
-                    },{
-                        'role': 'storage2controller',
-                        'maxCout': 4,
-                        'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                    },{
-                        'role':'storage2builder',
-                        'maxCout': 0,
-                        'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                    }
-                ]
-            }
-            if(storage && links.length ==3){
-                Memory.roomStatus[room.name] = '正常3';
+        //         Memory.roomCreepCreator[room.name] = [
+        //             {
+        //                 'role': 'source2storage',
+        //                 'maxCout': 1,
+        //                 'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+        //             },{
+        //                 'role': 'storage2spawn',
+        //                 'maxCout': 2,
+        //                 'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
+        //             },{
+        //                 'role': 'source2link',
+        //                 'maxCout': 1,
+        //                 'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+        //             },{
+        //                 'role': 'link2storage',
+        //                 'maxCout': 1,
+        //                 'components':[CARRY,MOVE],
+        //             },{
+        //                 'role': 'storage2controller',
+        //                 'maxCout': 4,
+        //                 'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+        //             },{
+        //                 'role':'storage2builder',
+        //                 'maxCout': 0,
+        //                 'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+        //             }
+        //         ]
+        //     }
+        //     if(storage && links.length ==3){
+        //         Memory.roomStatus[room.name] = '正常3';
 
-                Memory.roomCreepCreator[room.name] = [
-                    {
-                        'role': 'source2storage',
-                        'maxCout': 1,
-                        'components':[WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
-                    },{
-                        'role': 'storage2spawn',
-                        'maxCout': 1,
-                        'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
-                    },{
-                        'role': 'source2link',
-                        'maxCout': 1,
-                        'components':[WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
-                    },{
-                        'role': 'link2storage',
-                        'maxCout': 1,
-                        'components':[CARRY,MOVE],
-                    },{
-                        'role': 'storage2controller',
-                        'maxCout': 2,
-                        'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
-                    },{
-                        'role':'storage2builder',
-                        'maxCout': 0,
-                        'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                    },{
-                        'role':'clear',
-                        'maxCout': 1,
-                        'components':[CARRY,CARRY,MOVE],
-                    }
-                ]
-            }
-        }
+        //         Memory.roomCreepCreator[room.name] = [
+        //             {
+        //                 'role': 'source2storage',
+        //                 'maxCout': 1,
+        //                 'components':[WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+        //             },{
+        //                 'role': 'storage2spawn',
+        //                 'maxCout': 1,
+        //                 'components':[CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
+        //             },{
+        //                 'role': 'source2link',
+        //                 'maxCout': 1,
+        //                 'components':[WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+        //             },{
+        //                 'role': 'link2storage',
+        //                 'maxCout': 1,
+        //                 'components':[CARRY,MOVE],
+        //             },{
+        //                 'role': 'storage2controller',
+        //                 'maxCout': 2,
+        //                 'components':[WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,MOVE],
+        //             },{
+        //                 'role':'storage2builder',
+        //                 'maxCout': 0,
+        //                 'components':[WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+        //             },{
+        //                 'role':'clear',
+        //                 'maxCout': 1,
+        //                 'components':[CARRY,CARRY,MOVE],
+        //             }
+        //         ]
+        //     }
+        // }
 
-        // 对应状态update
-        if(Memory.roomStatus[room.name] == '正常2'){
-            normal2.update(room);
-        }
-        if(Memory.roomStatus[room.name] == '正常3'){
-            normal3.update(room);
-        }
+        // // 对应状态update
+        // if(Memory.roomStatus[room.name] == '正常2'){
+        //     normal2.update(room);
+        // }
+        // if(Memory.roomStatus[room.name] == '正常3'){
+        //     normal3.update(room);
+        // }
     },
 };
 
