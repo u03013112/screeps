@@ -83,6 +83,12 @@ var status = {
                 return structure.structureType == STRUCTURE_LINK;
             }
         })
+        var storage = room.storage;
+        var links = room.find(FIND_STRUCTURES,{
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_LINK;
+            }
+        })
         if (Memory.roomStatus[room.name] == '低消耗' && creeps.length >= 4 && containers.length == 0 && !storage && links.length == 0) {
             Memory.roomCreepCreator[room.name] = [
                 {
