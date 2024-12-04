@@ -72,6 +72,45 @@ var status = {
                 return;
             }
         }
+
+        if (Memory.roomStatus[room.name] == '低消耗' && creeps.length >= 4 && containers.length == 0 && !storage && links.length == 0) {
+            Memory.roomCreepCreator[room.name] = [
+                {
+                    'role': 'harvester',
+                    'maxCout': 4,
+                    'components': [WORK, CARRY, MOVE],
+                },
+                {
+                    'role': 'upgrader',
+                    'maxCout': 2,
+                    'components': [WORK, CARRY, MOVE],
+                }
+            ];
+
+            // 检查是否有需要建造的建筑
+            var constructionSites = room.find(FIND_CONSTRUCTION_SITES);
+            // 如果有需要建造的建筑，添加一个 builder
+            if (constructionSites.length > 0) {
+                Memory.roomCreepCreator[room.name] = [
+                    {
+                        'role': 'harvester',
+                        'maxCout': 4,
+                        'components': [WORK, CARRY, MOVE],
+                    },
+                    {
+                        'role': 'upgrader',
+                        'maxCout': 2,
+                        'components': [WORK, CARRY, MOVE],
+                    },
+                    {
+                        'role': 'builder',
+                        'maxCout': 1,
+                        'components': [WORK, CARRY, MOVE],
+                    }
+                ];
+            }
+
+        }
         // if(Memory.roomStatus[room.name] == '低消耗' && creeps.length >= 4){
         //     // 如果有storage,link,那么就是正常状态2
         //     var storage = room.storage;
