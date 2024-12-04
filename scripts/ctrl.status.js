@@ -45,6 +45,13 @@ var status = {
         }
         if(Memory.roomStatus[room.name] == undefined){
             Memory.roomStatus[room.name] = '低消耗';
+            Memory.roomCreepCreator[room.name] = [
+                {
+                    'role': 'harvester',
+                    'maxCout': 4,
+                    'components':[WORK,CARRY,MOVE],
+                }
+            ]
         }
         if(Memory.roomCreepCreator == undefined){
             Memory.roomCreepCreator = {};
