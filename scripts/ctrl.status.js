@@ -116,7 +116,7 @@ var status = {
                     },
                     {
                         'role': 'builder',
-                        'maxCout': 1,
+                        'maxCout': 2,
                         'components': [WORK, CARRY, MOVE],
                     }
                 ];
